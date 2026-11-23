@@ -1,0 +1,13 @@
+# Local configuration, deployment exports and WordPress runtime
+.env
+.env.*
+!.env.example
+wp-config.php
+*.log
+.DS_Store
+.idea/
+.vscode/
+/vendor/
+/node_modules/
+/coverage/
+/.phpunit.result.cache
