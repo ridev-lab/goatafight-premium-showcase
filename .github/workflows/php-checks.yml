@@ -1,0 +1,28 @@
+name: PHP checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  php-checks:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ['7.4', '8.2', '8.3']
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+      - name: Lint plugin and tests
+        run: |
+          php -l goatafight-premium.php
+          php -l tests/smoke.php
+          php -l config.example.php
+      - name: Smoke tests
+        run: php tests/smoke.php
